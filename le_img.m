@@ -1,5 +1,4 @@
 function h = le_img(f,alfa)
-fonte = f;
 f = fileread(f);
 if (nargin == 1)
     alfa = unique(f);
@@ -12,12 +11,12 @@ end
 bar(double(alfa),h);
 title("Histograma da imagem ");
 ylabel("Ocorrencias");
-xlabel("Alfabeto em código ASCII");
-entropia = calcula_entropia2(fonte);
-fprintf("Limite mínimo teórico para o número médio de bits por símbolo para a fonte:\t%f\n",entropia);         
+xlabel("Alfabeto em cÃ³digo ASCII");
+entropia = calcula_entropia2(alfa);
+fprintf("Limite mÃ­nimo teÃ³rico para o nÃºmero mÃ©dio de bits por sÃ­mbolo para a fonte:\t%f\n",entropia);         
 HLen = hufflen(h);
 huff = Huffman(h, HLen);
-fprintf("Número médio de bits por símbolo para a fonte:\t%f\n\n",huff);
+fprintf("NÃºmero mÃ©dio de bits por sÃ­mbolo para a fonte:\t%f\n\n",huff);
 
 end 
             
