@@ -1,0 +1,56 @@
+function[] = le_img(opc)
+    switch opc
+        case 2             
+            nomeFonte = "landscape.bmp";
+            fonte = fopen(nomeFonte);
+            read = imread(nomeFonte);
+            info = imfinfo(nomeFonte);
+            nrBits = info.BitDepth;
+            alfabeto = 0:(2^nrBits)-1;
+            ocorrencias = histcounts(read, [alfabeto, alfabeto(end)+1]);
+            bar(alfabeto, ocorrencias);
+            title("Histograma da imagem 'MRI.bmp'");
+            ylabel("Ocorrencias");
+            xlabel("Alfabeto em código ASCII");
+            entropia = calcula_entropia2("MRI.bmp");
+            fprintf("Limite mínimo teórico para o número médio de bits por símbolo para a fonte 'MRI.bmp':\t%f\n\n",entropia);         
+            
+            
+            
+        case 3
+            nomeFonte = "MRI.bmp";
+            fonte = fopen(nomeFonte);
+            read = imread(nomeFonte);
+            info = imfinfo(nomeFonte);
+            nrBits = info.BitDepth;
+            alfabeto = 0:(2^nrBits)-1;
+            ocorrencias = histcounts(read, [alfabeto, alfabeto(end)+1]);
+            bar(alfabeto, ocorrencias);
+            title("Histograma da imagem 'MRIbin.bmp'");
+            ylabel("Ocorrencias");
+            xlabel("Alfabeto em código ASCII"); 
+            entropia = calcula_entropia2("MRIbin.bmp");
+            fprintf("Limite mínimo teórico para o número médio de bits por símbolo para a fonte 'MRIbin.bmp':\t%f\n\n",entropia);
+            
+            
+        case 4
+            nomeFonte = "MRIbin.bmp";
+            fonte = fopen(nomeFonte);
+            info = imfinfo(nomeFonte);
+            read = imread(nomeFonte);
+            nrBits = info.BitDepth;  
+            alfabeto = 0:(2^nrBits)-1;
+            ocorrencias = histcounts(read, [alfabeto, alfabeto(end)+1]);
+            bar(alfabeto, ocorrencias);
+            title("Histograma da imagem 'MRIbin.bmp'");
+            ylabel("Ocorrencias");
+            xlabel("Alfabeto em código ASCII");
+            entropia = calcula_entropia2("soundMono.wav");
+            fprintf("Limite mínimo teórico para o número médio de bits por símbolo para a fonte 'soundMono.wav':\t%f\n\n",entropia);
+    end
+    HLen = hufflen(ocorrencias);
+    huff = Huffman(ocorrencias, HLen);
+    fprintf("Número médio de bits por símbolo para a fonte:\t%f\n\n",huff);
+
+end 
+            
